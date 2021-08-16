@@ -1,0 +1,50 @@
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+import java.util.function.Function;
+
+/* Faça um programa que apresente quatro opções:
+ * (1) Consultar saldo;
+ * (2) Saque;
+ * (3) Depósito;
+ * (4) Sair;
+ * O saldo deve iniciar em R$ 0,00. A cada saque ou depósito, o valor do saldo 
+ * deve ser atualizado.
+ */
+
+public class Ex02 {
+	float saldo = 0.0f;
+
+	interface Lambda {
+		void run(Ex02 from);
+	}
+	
+	public static void main(String[] args) {
+		int choice;
+		Scanner scan = new Scanner(System.in);
+		List<Ex02.Lambda> actions = Arrays.asList(
+				(Lambda) (Ex02 from) -> System.out.printf("%d\n", from.saldo),
+				(Lambda) (Ex02 from) -> from.saldo -= 1,
+				(Lambda) (Ex02 from) -> from.saldo += 1);
+		List<String> options = Arrays.asList(
+				"Consultar saldo",
+				"Saque",
+				"Depósito");
+		int optionsAmount = options.size();
+		
+		for (;;) {
+			for (int i = 0; i < optionsAmount; ++i) {
+				System.out.printf("%d %s\n", i + 1, options.get(i));
+			}
+			System.out.println(">>> ");
+			
+			if ((choice = scan.nextInt()) == optionsAmount)
+				break;
+			
+			actions.get(choice).Lambda(this);
+			// Can not use this in a static contest
+		}
+		
+		scan.close();
+	}
+}
