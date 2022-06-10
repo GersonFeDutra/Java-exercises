@@ -1,5 +1,5 @@
 
-public class Pen {
+public class Ex03_Pen {
 	String color;
 	double charge = 100.0;
 	boolean isCapped = true;

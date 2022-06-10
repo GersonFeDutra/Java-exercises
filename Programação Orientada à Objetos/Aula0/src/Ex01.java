@@ -8,23 +8,34 @@ public class Ex01 {
 
 	public static void main(String[] args) {
 
-		Scanner scan = new Scanner(System.in);
-		System.out.print("Digite um número inteiro: ");
-		int x = scan.nextInt();
-		System.out.printf("%d %s primo\n", x, isPrime(x) ? "é" : "não é");
-		scan.close();
+		try (Scanner scan = new Scanner(System.in)) {
+			// Lê um número inteiro.
+			System.out.print("Digite um número inteiro: ");
+			int x = scan.nextInt();
+
+			// Identifica se o número é primo.
+			System.out.printf("%d %s primo.\n", x, isPrime(x) ? "é" : "não é");
+			if (x != 0)
+				System.out.println("%d é composto.");
+		}
 	}
 
-	/* Verifica se o dado número é primo. */
+	/*
+	 * Verifica se o dado número inteiro é primo.
+	 * Nota: Um número negativo é primo, se o seu oposto for primo.
+	 * Um número não-primo é composto se for diferente de zero.
+	 */
 	private static boolean isPrime(int x) {
-		boolean value = true;
+		boolean value = x != 0;
+		x = Math.abs(x);
 
-		for (int wall = x / 2 + 1, n = 2; n < wall; n++)
-
+		// x = alvo (é primo ?), n = atual (é fator ?).
+		for (int wall = x / 2 + 1, n = 2; n < wall; n++) {
 			if ((x % n) == 0) {
 				value = false;
 				break;
 			}
+		}
 
 		return value;
 	}

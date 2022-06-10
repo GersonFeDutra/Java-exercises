@@ -1,7 +1,7 @@
 
-public class Ex1 {
+public class TestEx04 {
 	public static void main(String[] args) {
-		Car car = new Car();
+		Ex04_Car car = new Ex04_Car();
 		car.model = "Carro popular";
 		car.accelerate();
 		car.isOn = true;

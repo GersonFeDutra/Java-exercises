@@ -1,22 +1,22 @@
 
-public class Point2Di {
+public class Ex06_Point2Di {
 	int x;
 	int y;
 
-	public Point2Di() {
+	public Ex06_Point2Di() {
 	}
 
-	public Point2Di(int xy) {
+	public Ex06_Point2Di(int xy) {
 		this.x = xy;
 		this.y = xy;
 	}
 
-	public Point2Di(int x, int y) {
+	public Ex06_Point2Di(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
 
-	public Point2Di(Point2Di opposite) {
+	public Ex06_Point2Di(Ex06_Point2Di opposite) {
 		this.x = -opposite.x;
 		this.y = -opposite.y;
 	}

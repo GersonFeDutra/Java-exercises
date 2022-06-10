@@ -1,9 +1,9 @@
 
-public class Test {
-	
+public class TestEx03 {
+
 	public static void main(String[] args) {
-		Pen pen1 = new Pen();
-		Pen pen2 = new Pen();
+		Ex03_Pen pen1 = new Ex03_Pen();
+		Ex03_Pen pen2 = new Ex03_Pen();
 		pen1.color = "Azul";
 		pen2.color = "Vermelha";
 		System.out.println("1: " + pen1.toString());

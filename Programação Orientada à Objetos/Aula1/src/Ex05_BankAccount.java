@@ -1,5 +1,5 @@
 
-public class BankAccount {
+public class Ex05_BankAccount {
 	String number;
 	double balance;
 
