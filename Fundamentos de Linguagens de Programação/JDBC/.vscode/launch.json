@@ -1,0 +1,51 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Java Program",
+            "request": "launch",
+            "mainClass": "br.com.agenda.app.Main"
+        },
+        {
+            "type": "java",
+            "name": "Launch With Args",
+            "request": "launch",
+            "mainClass": "br.com.agenda.app.Main",
+            "args": [
+                "${input:option}",
+                "${input:first}",
+                "${input:second}",
+                "${input:third}"
+            ]
+        }
+    ],
+    "inputs": [
+        {
+            "type": "pickString",
+            "id": "option",
+            "description": "Pick an option:",
+            "options": [
+                "-c",
+                "-r",
+                "-u",
+                "-d",
+                "-df",
+            ]
+        },
+        {
+            "type": "promptString",
+            "id": "first",
+            "description": "Arguments: -c <name> <>, -r, -u <id> <> <>, -d <id>"
+        },
+        {
+            "type": "promptString",
+            "id": "second",
+            "description": "Arguments: -c <> <age>, -r, -u <> <name> <>, -d <>"
+        },
+        {
+            "type": "promptString",
+            "id": "third",
+            "description": "Arguments: -c <> <>, -r, -u <> <> <age>, -d <>"
+        }
+    ]
+}
