@@ -1,0 +1,42 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch with Options",
+            "request": "launch",
+            "mainClass": "Main",
+            "args": "${input:opts}"
+        },
+        {
+            "type": "java",
+            "name": "Launch with Arguments Prompt",
+            "request": "launch",
+            "mainClass": "Main",
+            "args": "${command:SpecifyProgramArgs}"
+        },
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        }
+    ],
+    "inputs": [
+        {
+            "id": "opts",
+            "type": "pickString",
+            "options": [
+                "-a",
+                "-as",
+                "-m",
+                "-h",
+            ],
+            "description": "Select an option to add as an argument. -h for help."
+            
+        }
+    ]
+}
