@@ -27,4 +27,9 @@ public class Individual extends Person {
         this.cpf = cpf;
     }
 
+    @Override
+    public String toString() {
+        return super.toString() + ", cpf: " + this.cpf;
+    }
+
 }

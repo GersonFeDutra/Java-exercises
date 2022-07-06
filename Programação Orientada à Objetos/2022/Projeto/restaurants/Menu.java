@@ -20,21 +20,21 @@ public class Menu implements AutoCloseable {
     // cardápio.
     private Hashtable<Integer, Restaurant> restaurants;
 
-    public class NoRestaurant extends Exception {
-        NoRestaurant(String message) {
-            super(message);
-        }
-    }
-
-    public Menu(double value, String product, Restaurant[] restaurants) throws NoRestaurant {
+    public Menu(String product, double value) {
         this.id = lastId++;
         this.value = value;
         this.product = product;
         this.restaurants = new Hashtable<Integer, Restaurant>();
         Menu.lastInstance = this;
+    }
 
-        if (restaurants == null || restaurants.length == 0)
-            throw new NoRestaurant("No restaurant was associated with this menu");
+    public Menu(String product, double value, String description) {
+        this(product, value);
+        this.description = description;
+    }
+
+    public Menu(double value, String product, Restaurant[] restaurants) {
+        this(product, value);
 
         for (Restaurant restaurant : restaurants)
             this.restaurants.put(restaurant.getId(), restaurant);

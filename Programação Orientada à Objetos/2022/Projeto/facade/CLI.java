@@ -3,14 +3,15 @@ package facade;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.Random;
 import java.util.Scanner;
 
+import people.Individual;
+import people.LegalPerson;
 import people.PeopleRepository;
 import people.Person;
 import restaurants.Menu;
 import restaurants.Restaurant;
-import restaurants.Menu.NoRestaurant;
-import restaurants.Restaurant.EmptyMenu;
 
 /* CLI
  * Command Line Interface for the application.
@@ -23,11 +24,114 @@ public class CLI {
      * Faz as operações determinadas no exercício automaticamente.
      */
     public static void auto(boolean skipPauses) {
+        Person person;
+        ArrayList<Person> persons;
+        Random RNG = new Random();
+        Menu[] menus = {
+                new Menu("Banquete do deus sol", 16000.0,
+                        "Refeição completa para até 11 pessoas contendo ingredientes diversos de todo o mundo."),
+                new Menu("Jejum do deus da lua", 1250.0,
+                        "Uma ótima escolha para os mais sofisticados, embora seja uma refeição menor, para até 4 pessoas contém ingredientes raríssimos"),
+                new Menu("Siesta do deus da chuva", 1010.0,
+                        "Uma escolha tropical que consegue incluir diversos elementos em uma explosão de sabores. Até 6 pessoas a refeição."),
+                new Menu("Ceia do deus da terra", 850.0,
+                        "Contém os ingredientes mais simples dentre as refeições combo da nossa linha de restaurantes. Mas consegue ser muito generosa alimentando até 7 pessoas. Um ótimo custo-benefício."),
+                new Menu("Frutas selvagens", 150 / 4),
+                new Menu("Frutas de época", 250 / 4),
+                new Menu("Frutas comuns", 75.0),
+                new Menu("Bebidas exóticas", 150.0),
+                new Menu("Bebidas orientais", 250.0),
+                new Menu("Bebidas tropicais", 75.0),
+        };
+        Restaurant restaurant = new Restaurant("El Baratinho",
+                "Litoral, Pacífico Leste, Rua: Azulão, Número: 17-q Bairro: Só",
+                menus, new Person("Josef Roja", LocalDate.of(1999, 11, 18)));
+
         /*
          * Cadastro/consulta/remoção das pessoas (cadastre, pelo menos,
          * cinco pessoas físicas e três pessoas jurídicas).
          */
-        
+
+        // Cadastro
+        Individual[] individuals = {
+                new Individual("Lúcio Dom Márcio", "3-000.000.000 B", LocalDate.of(2002, 5, 5)),
+                new Individual("Zé Ronaldo Coronel", "0-320.000.000 B", LocalDate.of(2004, 11, 11)),
+                new Individual("Ana Miranda Natália", "0-066.000.000 B", LocalDate.of(2003, 7, 3)),
+                new Individual("São Pinóquio De Mira Boa", "0-200.000.000 B", LocalDate.of(2003, 4, 1)),
+                new Individual("Vincent Santos Shakespeare II", "0-330.000.000 B", LocalDate.of(2004, 3, 2)),
+        }; // Pessoas físicas.
+        LegalPerson[] legalPersons = {
+                new LegalPerson("Antônio Tonho Servo", "000,100 B:0 0 00 00", LocalDate.of(2005, 24, 12)),
+                new LegalPerson("Roberta Nicole", "130,000 00 0B: 00 00", LocalDate.of(1991, 2, 6)),
+                new LegalPerson("Francisco Supremo", "094,000 00 0B: 00 00", LocalDate.of(1985, 3, 9)),
+        }; // Pessoas jurídicas
+
+        System.out.printf("Cadastrando pessoas no restaurante %s:\n", restaurant.getName());
+
+        // Pessoas físicas:
+        pauseLog(skipPauses, "Registrando \"pessoas físicas\":");
+        for (Individual individual : individuals) {
+            System.out.printf("Registrando: %s\n", individual);
+            restaurant.register(individual);
+        }
+
+        // Pessoas jurídicas:
+        pauseLog(skipPauses, "Registrando \"pessoas jurídicas\":");
+        for (LegalPerson legalPerson : legalPersons) {
+            System.out.printf("Registrando: %s\n", legalPerson);
+            restaurant.register(legalPerson);
+        }
+
+        // Consultas
+        pauseLog(skipPauses, "Consultando o registro das pessoas no restaurante, aleatoriamente:");
+        System.out.println("Consultando uma pessoa legal por id:");
+        person = legalPersons[RNG.nextInt(legalPersons.length)];
+        System.out.printf("Consultando pessoa de id %d:\n", person.getId());
+        person = restaurant.getClientById(person.getId());
+        System.out.printf("Pessoa encontrada: %s\n", person.toString());
+        System.out.println();
+
+        System.out.println("Consultando \"pessoas físicas\" por nome:");
+        person = individuals[RNG.nextInt(individuals.length)];
+        System.out.printf("Consultando pessoas de nome %s:\n", person.getName());
+        persons = restaurant.getClientsByName(person.getName());
+
+        for (Person _person : persons)
+            System.out.printf("Pessoa encontrada: %s\n", _person.toString());
+
+        // Remoções
+        pauseLog(skipPauses, "Removendo o registro das pessoas no restaurante, aleatoriamente:");
+        System.out.println("Removendo uma \"pessoa física\" por id:");
+        person = individuals[RNG.nextInt(individuals.length)];
+        System.out.printf("Removendo uma pessoa de id %d:\n", person.getId());
+        person = restaurant.removeByID(person.getId());
+        System.out.printf("Pessoa removida: %s\n", person.toString());
+        System.out.println();
+
+        System.out.println("Removendo \"pessoas físicas\" de forma direta:");
+        person = legalPersons[RNG.nextInt(legalPersons.length)];
+        System.out.printf("Removendo <%s> dos registros do restaurante:\n", person.toString());
+
+        if (restaurant.remove(person))
+            System.out.printf("%s removido(a) com sucesso!\n", person.getName());
+
+    }
+
+    public static void pauseLog(boolean skipPauses, String message) {
+        System.out.println();
+        System.out.println(message);
+        if (skipPauses)
+            return;
+        System.out.println("Pressione Enter para continuar...");
+
+    }
+
+    public static void pause(boolean skipPauses) {
+        System.out.println();
+        if (skipPauses)
+            return;
+        System.out.println("Pressione Enter para continuar...");
+
     }
 
     /*
@@ -116,7 +220,6 @@ public class CLI {
         String name;
         String address;
         Hashtable<Integer, Menu> menu = defaultMenu;
-        Restaurant newRestaurant = null;
 
         System.out.printf("Insert restaurant name: ");
         name = scanner.nextLine();
@@ -153,13 +256,7 @@ public class CLI {
             updateMenu(menu, scanner);
         } // else: use default
 
-        try {
-            newRestaurant = new Restaurant(name, address, (Menu[]) defaultMenu.values().toArray(), manager);
-        } catch (EmptyMenu e) {
-            System.out.println("Waring! restaurant has an empty menu. Will not operate properly.");
-        }
-
-        return newRestaurant;
+        return new Restaurant(name, address, (Menu[]) defaultMenu.values().toArray(), manager);
     }
 
     /* Função auxiliar para atualizar o cardápio indicado. */
@@ -189,18 +286,14 @@ public class CLI {
                     String description = scanner.nextLine();
                     Menu newMenu = null;
 
-                    try {
-                        newMenu = new Menu(value, name, null);
-                    } catch (NoRestaurant e) {
-                    } finally {
-                        if (newMenu != null) {
-                            menu.put(newMenu.getId(), newMenu);
+                    newMenu = new Menu(value, name, null);
+                    if (newMenu != null) {
+                        menu.put(newMenu.getId(), newMenu);
 
-                            if (!description.isBlank())
-                                newMenu.setDescription(description);
+                        if (!description.isBlank())
+                            newMenu.setDescription(description);
 
-                            System.out.println("Product created!");
-                        }
+                        System.out.println("Product created!");
                     }
                 }
                     break;

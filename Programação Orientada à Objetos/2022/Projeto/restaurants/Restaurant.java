@@ -2,6 +2,7 @@ package restaurants;
 
 import people.Person;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Hashtable;
 import java.util.LinkedList;
@@ -28,13 +29,13 @@ public class Restaurant {
         }
     }
 
-    public class EmptyMenu extends Exception {
-        EmptyMenu(String message) {
+    public class IdNotFound extends Exception {
+        IdNotFound(String message) {
             super(message);
         }
     }
 
-    public Restaurant(String name, String address, Menu[] menus, Person manager) throws EmptyMenu {
+    public Restaurant(String name, String address, Menu[] menus, Person manager) {
         this.id = ++Restaurant.lastId;
         this.name = name;
         this.address = address;
@@ -46,10 +47,6 @@ public class Restaurant {
 
         for (Menu menu : menus)
             addMenu(menu);
-
-        if (menus.length == 0)
-            throw new EmptyMenu(
-                    "Restaurant was created with an empty menu, may not operate normally.");
     }
 
     /*
@@ -58,6 +55,33 @@ public class Restaurant {
      */
     public void register(Person person) {
         clients.add(person);
+    }
+
+    /* Consulta o id de um cliente do restaurante, retornando seu registro. */
+    public Person getClientById(int id) {
+        return clients.getPersonById(id);
+    }
+
+    /* Consulta o nome dos clientes do restaurante, retornando registros correspondentes. */
+    public ArrayList<Person> getClientsByName(String name) {
+        return clients.getPersonsByName(name);
+    }
+
+    /*
+     * Remove e retorna registro de um cliente do repositório,
+     * se o mesmo estiver presente; caso contrário, retornará null.
+     */
+    public Person removeByID(int id) {
+        return clients.removePersonByID(id);
+    }
+
+    /*
+     * Remove e retorna um cliente diretamente, se o mesmo estiver presente no
+     * repositório.
+     * Retorna um boolean para indicar o sucesso da operação.
+     */
+    public boolean remove(Person person) {
+        return clients.remove(person);
     }
 
     /* Realiza um pedido para a pessoa indicada com base em algum item do menu. */
@@ -178,7 +202,7 @@ public class Restaurant {
 
     @Override
     public String toString() {
-        return String.format("[%d]: %s, %s", id, name, manager.getName());
+        return String.format("[%d]: %s, Gerente: %s", id, name, manager.getName());
     }
 
 }

@@ -19,6 +19,10 @@ public class PeopleRepository {
         this.nameMap = new Hashtable<String, ArrayList<Person>>();
     }
 
+    /*
+     * Verifica o repositório por uma pessoa com o id indicado.
+     * Retorna null se não for encontrado.
+     */
     public Person getPersonById(int id) {
         return idMap.getOrDefault(id, null);
     }
@@ -55,14 +59,27 @@ public class PeopleRepository {
      * Retorna falso se a pessoa não estiver presente.
      */
     public boolean remove(Person person) {
-        if (!idMap.containsKey(person.getId()))
+        if (person == null || !idMap.containsKey(person.getId()))
             return false;
+        
         ArrayList<Person> people = nameMap.get(person.getName());
-
         people.remove(person);
         idMap.remove(person.getId());
 
         return this.people.remove(person);
+    }
+
+    /*
+     * Busca e remove uma pessoa do repositório com o id indicado.
+     * Se não for encontrada, retorna null.
+     */
+    public Person removePersonByID(int id) {
+        Person person = idMap.getOrDefault(id, null);
+
+        if (remove(person))
+            return person;
+
+        return null;
     }
 
     public ArrayList<Person> getPeople() {

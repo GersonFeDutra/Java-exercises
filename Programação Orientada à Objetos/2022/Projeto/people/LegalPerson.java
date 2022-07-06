@@ -9,8 +9,9 @@ import java.time.LocalDate;
 public class LegalPerson extends Person {
     private String cnpj;
 
-    public LegalPerson(String name, LocalDate birth) {
+    public LegalPerson(String name, String cnpj, LocalDate birth) {
         super(name, birth);
+        this.cnpj = cnpj;
     }
 
     public String getCnpj() {
@@ -19,5 +20,10 @@ public class LegalPerson extends Person {
 
     public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + ", cnpj: " + this.cnpj;
     }
 }
