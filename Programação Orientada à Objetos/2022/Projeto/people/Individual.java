@@ -3,6 +3,10 @@ package people;
 import java.time.LocalDate;
 import java.time.Period;
 
+/*
+ * Individual
+ * Uma pessoa física: possui cpf.
+ */
 public class Individual extends Person {
     private String cpf;
 

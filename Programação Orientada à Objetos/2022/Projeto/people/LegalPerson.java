@@ -2,6 +2,10 @@ package people;
 
 import java.time.LocalDate;
 
+/* 
+ * LegalPerson
+ * Uma pessoa jurídica: contém cnpj.
+ */
 public class LegalPerson extends Person {
     private String cnpj;
 

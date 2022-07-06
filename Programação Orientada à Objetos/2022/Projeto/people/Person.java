@@ -1,9 +1,15 @@
 package people;
 
 import java.time.LocalDate;
+import java.util.Hashtable;
 
-import restaurants.Ticket;
+import restaurants.Demand;
+import restaurants.Restaurant;
 
+/*
+ * Person
+ * Classe base para qualquer cliente usuário da aplicação.
+ */
 public class Person {
     private int id;
     private String name;
@@ -11,11 +17,22 @@ public class Person {
     private String phone;
     private String city;
     private LocalDate birthDate;
-    private Ticket ticket;
+    // Armazena e associa os pedidos com o restaurante em que ele foi feito.
+    private Hashtable<Demand, Restaurant> demands;
 
     public Person(String name, LocalDate birth) {
         this.name = name;
         this.birthDate = birth;
+    }
+
+    /* Guarda um pedido feito em algum restaurante, associado à pessoa. */
+    public void storeDemand(Demand demand, Restaurant restaurant) {
+        demands.put(demand, restaurant);
+    }
+
+    /* Remove um pedido associado a pessoa, retornando o restaurante em que foi feito. */
+    public Restaurant cleanDemand(Demand demand) {
+        return demands.remove(demand);
     }
 
     public int getId() {
@@ -66,14 +83,6 @@ public class Person {
         this.birthDate = birthDate;
     }
 
-    public Ticket getTicket() {
-        return ticket;
-    }
-
-    public void setTicket(Ticket ticket) {
-        this.ticket = ticket;
-    }
-    
     @Override
     public String toString() {
         return String.format("[%d]: %s", this.id, this.name);

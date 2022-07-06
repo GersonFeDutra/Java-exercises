@@ -3,6 +3,11 @@ package people;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
+/*
+ * PeopleRepository
+ * Um repositório de pessoas.
+ * Classe repositório auxiliar para lidar com um conjunto de Person.
+ */
 public class PeopleRepository {
     private ArrayList<Person> people;
     private Hashtable<Integer, Person> idMap;
@@ -22,9 +27,17 @@ public class PeopleRepository {
         return nameMap.get(name);
     }
 
+    /*
+     * Adiciona uma pessoa no repositório.
+     * Se a pessoa já estiver registrada, não será inserida novamente.
+     */
     public void add(Person person) {
         String name = person.getName();
         ArrayList<Person> people;
+
+        if (idMap.containsKey(person.getId()))
+            return;
+
         this.people.add(person);
 
         if (nameMap.containsKey(name))
@@ -37,6 +50,10 @@ public class PeopleRepository {
         idMap.put(person.getId(), person);
     }
 
+    /*
+     * Remove uma pessoa do repositório.
+     * Retorna falso se a pessoa não estiver presente.
+     */
     public boolean remove(Person person) {
         if (!idMap.containsKey(person.getId()))
             return false;
