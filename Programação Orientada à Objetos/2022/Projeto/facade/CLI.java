@@ -2,6 +2,7 @@ package facade;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Hashtable;
 import java.util.Random;
 import java.util.Scanner;
@@ -61,7 +62,7 @@ public class CLI {
                 new Individual("Vincent Santos Shakespeare II", "0-330.000.000 B", LocalDate.of(2004, 3, 2)),
         }; // Pessoas físicas.
         LegalPerson[] legalPersons = {
-                new LegalPerson("Antônio Tonho Servo", "000,100 B:0 0 00 00", LocalDate.of(2005, 24, 12)),
+                new LegalPerson("Antônio Tonho Servo", "000,100 B:0 0 00 00", LocalDate.of(2005, 12, 24)),
                 new LegalPerson("Roberta Nicole", "130,000 00 0B: 00 00", LocalDate.of(1991, 2, 6)),
                 new LegalPerson("Francisco Supremo", "094,000 00 0B: 00 00", LocalDate.of(1985, 3, 9)),
         }; // Pessoas jurídicas
@@ -96,6 +97,7 @@ public class CLI {
         System.out.printf("Consultando pessoas de nome %s:\n", person.getName());
         persons = restaurant.getClientsByName(person.getName());
 
+        
         for (Person _person : persons)
             System.out.printf("Pessoa encontrada: %s\n", _person.toString());
 
@@ -114,6 +116,20 @@ public class CLI {
 
         if (restaurant.remove(person))
             System.out.printf("%s removido(a) com sucesso!\n", person.getName());
+
+        /*
+         * Mostrar todos os itens que estão no cardápio.
+         */
+
+        System.out.println();
+        pauseLog(skipPauses, String.format(
+                "Listando os itens do cardápio do restaurante %s", restaurant.getName()));
+        Collection<Menu> itens = restaurant.getMenus();
+        
+        System.out.println(String.format("%22s | %6s | Descrição", "Nome", "Valor"));
+        for (Menu item : itens)
+            System.out.println(String.format("%22s | %6s | %s",
+                    item.getProduct(), item.getValue(), item.getDescription()));
 
     }
 

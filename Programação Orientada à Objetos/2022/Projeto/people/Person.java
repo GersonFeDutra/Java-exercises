@@ -11,6 +11,7 @@ import restaurants.Restaurant;
  * Classe base para qualquer cliente usuário da aplicação.
  */
 public class Person {
+    static protected int lastUsedID = 0;
     private int id;
     private String name;
     private String email;
@@ -21,6 +22,7 @@ public class Person {
     private Hashtable<Demand, Restaurant> demands;
 
     public Person(String name, LocalDate birth) {
+        this.id = lastUsedID++;
         this.name = name;
         this.birthDate = birth;
     }
