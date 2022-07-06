@@ -200,6 +200,10 @@ public class Restaurant {
         this.description = description;
     }
 
+    public String getManagerName() {
+        return this.manager.getName();
+    }
+    
     @Override
     public String toString() {
         return String.format("[%d]: %s, Gerente: %s", id, name, manager.getName());

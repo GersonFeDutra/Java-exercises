@@ -131,6 +131,25 @@ public class CLI {
             System.out.println(String.format("%22s | %6s | %s",
                     item.getProduct(), item.getValue(), item.getDescription()));
 
+        /*
+         * Cadastro/consulta de todos os restaurantes.
+         */
+        Restaurant[] restaurants = {
+            restaurant,
+            new Restaurant("Siri cascudo", "Fenda do Biquíni, Triângulo das Bermudas, Rua: Esquina comercial",
+                    menus, new Person("Seu Sirigueijo", LocalDate.of(1980, 10, 11))),
+            new Restaurant("Papa's restaurant", "França, Beco dos Cones, Rua: Avenida dos chapéus, Número: 804",
+                    menus, new Person("Papa MakerMan", LocalDate.of(1979, 01, 23))),
+            new Restaurant("TorikoLand", "Novo Mundo, Ala 2, Floresta encantada, Rua: encontro dos sabores.",
+                    menus, new Person("Toriko", LocalDate.of(1995, 07, 03))),
+        };
+        
+        pauseLog(skipPauses, "Restaurantes criados:");
+        System.out.println(String.format("%22s | %6s | Endereço", "Nome", "Gerente"));
+        for (Restaurant _restaurant : restaurants) {
+            System.out.printf("%22s | %6s | %s",
+                    _restaurant.getName(), _restaurant.getManagerName(), _restaurant.getAddress());
+        }
     }
 
     public static void pauseLog(boolean skipPauses, String message) {
