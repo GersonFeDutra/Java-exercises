@@ -11,8 +11,10 @@ import people.Individual;
 import people.LegalPerson;
 import people.PeopleRepository;
 import people.Person;
+import restaurants.Demand;
 import restaurants.Menu;
 import restaurants.Restaurant;
+import restaurants.Restaurant.NotRegistered;
 
 /* CLI
  * Command Line Interface for the application.
@@ -97,7 +99,6 @@ public class CLI {
         System.out.printf("Consultando pessoas de nome %s:\n", person.getName());
         persons = restaurant.getClientsByName(person.getName());
 
-        
         for (Person _person : persons)
             System.out.printf("Pessoa encontrada: %s\n", _person.toString());
 
@@ -125,7 +126,7 @@ public class CLI {
         pauseLog(skipPauses, String.format(
                 "Listando os itens do cardápio do restaurante %s", restaurant.getName()));
         Collection<Menu> itens = restaurant.getMenus();
-        
+
         System.out.println(String.format("%22s | %6s | Descrição", "Nome", "Valor"));
         for (Menu item : itens)
             System.out.println(String.format("%22s | %6s | %s",
@@ -135,21 +136,68 @@ public class CLI {
          * Cadastro/consulta de todos os restaurantes.
          */
         Restaurant[] restaurants = {
-            restaurant,
-            new Restaurant("Siri cascudo", "Fenda do Biquíni, Triângulo das Bermudas, Rua: Esquina comercial",
-                    menus, new Person("Seu Sirigueijo", LocalDate.of(1980, 10, 11))),
-            new Restaurant("Papa's restaurant", "França, Beco dos Cones, Rua: Avenida dos chapéus, Número: 804",
-                    menus, new Person("Papa MakerMan", LocalDate.of(1979, 01, 23))),
-            new Restaurant("TorikoLand", "Novo Mundo, Ala 2, Floresta encantada, Rua: encontro dos sabores.",
-                    menus, new Person("Toriko", LocalDate.of(1995, 07, 03))),
+                restaurant,
+                new Restaurant("Siri cascudo", "Fenda do Biquíni, Triângulo das Bermudas, Rua: Esquina comercial",
+                        menus, new Person("Seu Sirigueijo", LocalDate.of(1980, 10, 11))),
+                new Restaurant("Papa's restaurant", "França, Beco dos Cones, Rua: Avenida dos chapéus, Número: 804",
+                        menus, new Person("Papa MakerMan", LocalDate.of(1979, 01, 23))),
+                new Restaurant("TorikoLand", "Novo Mundo, Ala 2, Floresta encantada, Rua: encontro dos sabores.",
+                        menus, new Person("Toriko", LocalDate.of(1995, 07, 03))),
         };
-        
+
         pauseLog(skipPauses, "Restaurantes criados:");
         System.out.println(String.format("%22s | %6s | Endereço", "Nome", "Gerente"));
         for (Restaurant _restaurant : restaurants) {
             System.out.printf("%22s | %6s | %s",
                     _restaurant.getName(), _restaurant.getManagerName(), _restaurant.getAddress());
         }
+
+        /*
+         * Pesquisa os pedidos realizados por uma determinada pessoa jurídica em um
+         * restaurante específico.
+         * &
+         * Realiza o cadastro de um pedido com três itens do cardápio de um determinado
+         * restaurante.
+         */
+
+        // Fazendo os pedidos:
+        pauseLog(skipPauses, "Fazendo os pedidos:");
+
+        for (int i = 0; i < 3; ++i) {
+            try {
+                restaurant.request(individuals[i], menus[i].getId());
+                System.out.printf("<%s> requisitou o pedido <%s>.\n", individuals[i].toString(), menus[i].toString());
+            } catch (NotRegistered e) {
+                System.out.printf("<%s> não registrado no restaurante <%s>.\n",
+                        individuals[i].toString(), restaurant);
+            }
+        }
+        for (int i = 0; i < 2; ++i) {
+            // Os itens do menu são equivalentes a um único Demand, logo 3 itens = 3
+            // Demands.
+            try {
+                restaurant.request(legalPersons[i], menus[i].getId());
+                System.out.printf("<%s> requisitou o pedido <%s>.\n", legalPersons[i].toString(), menus[i].toString());
+                restaurant.request(legalPersons[i], menus[menus.length - i - 1].getId());
+                System.out.printf("<%s> também requisitou <%s>.\n", legalPersons[i].toString(), menus[i].toString());
+                restaurant.request(legalPersons[i], menus[menus.length - i - 2].getId());
+                System.out.printf("<%s> também requisitou <%s>.\n", legalPersons[i].toString(), menus[i].toString());
+            } catch (NotRegistered e) {
+                System.out.printf("<%s> não registrado no restaurante <%s>.\n",
+                        legalPersons[i].toString(), restaurant);
+            }
+        }
+
+        // Buscando o pedido:
+        pauseLog(skipPauses, String.format(
+                "Verificando os pedido de <%s> no restaurante %s:",
+                legalPersons[0].toString(), restaurant.toString()));
+        Collection<Demand> demands = restaurant.getRequestsFrom(legalPersons[0]);
+
+        if (demands != null)
+            for (Demand _demand : demands)
+                System.out.printf("Pedido <%s>: %s.\n", _demand.getId(),
+                        restaurant.getMenu(_demand.getId()).toString());
     }
 
     public static void pauseLog(boolean skipPauses, String message) {

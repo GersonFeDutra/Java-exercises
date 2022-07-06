@@ -14,7 +14,7 @@ public class Menu implements AutoCloseable {
     private int id;
     private double value;
     private String product;
-    private String description;
+    private String description = "";
     private String image;
     // Restaurantes nos quais o menu está associado, e sua respectiva colocação no
     // cardápio.

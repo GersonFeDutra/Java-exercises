@@ -62,7 +62,10 @@ public class Restaurant {
         return clients.getPersonById(id);
     }
 
-    /* Consulta o nome dos clientes do restaurante, retornando registros correspondentes. */
+    /*
+     * Consulta o nome dos clientes do restaurante, retornando registros
+     * correspondentes.
+     */
     public ArrayList<Person> getClientsByName(String name) {
         return clients.getPersonsByName(name);
     }
@@ -163,11 +166,22 @@ public class Restaurant {
         return wasAdded;
     }
 
+    /* Retorna o menu com base no id passado. */
+    public Menu getMenu(int id) {
+        return menus.getOrDefault(id, null);
+    }
+    
+    
     /* Retorna todos os itens do cardápio. */
     public Collection<Menu> getMenus() {
         return menus.values();
     }
 
+    /* Retorna todos os pedidos de um dado cliente */
+    public Collection<Demand> getRequestsFrom(Person person) {
+        return person.getRequestsAt(this);
+    }
+    
     public int getId() {
         return this.id;
     }
@@ -203,7 +217,7 @@ public class Restaurant {
     public String getManagerName() {
         return this.manager.getName();
     }
-    
+
     @Override
     public String toString() {
         return String.format("[%d]: %s, Gerente: %s", id, name, manager.getName());
