@@ -1,0 +1,23 @@
+{
+    "types": [
+        "lançamento de livro", "greve", "inovação tecnológica"
+    ],
+    "descriptions": {
+        "lançamento de livro": [
+            "Novo livro da franquia \"Senhor dos anéis\" é sucesso de vendas no Brasil.",
+            "Livro \"A arte de ligar o f0d@-s3\" é criticado e nomeado como \"a nova piada coach\" por internautas.",
+            "Livros quentes que você não pode deixar passar. Confira a nossa lista de lançamentos.",
+        ],
+        "greve": [
+            "Greve de professores instaurada no colégio Adauto Bezerra",
+            "Funcionários protestantes fazem greve em frente a prefeitura.",
+            "Greve dos caminhoneiros atinge recorde de 15 dias em Rondônia."
+        ],
+        "inovação tecnológica": [
+            "Nova inteligência artificial com detecção avançada de movimento inspira um novo futuro para a robótica.",
+            "Testes com 6G começam a expandir os limites da tecnologia, uma banda jamais antes alcançada.",
+            "Casas inteligentes começam a ser produzidas em larga escala com preços acessíveis.",
+            "Apple lança sua nova linha revolucionária de robôs domésticos."
+        ]
+    }
+}
