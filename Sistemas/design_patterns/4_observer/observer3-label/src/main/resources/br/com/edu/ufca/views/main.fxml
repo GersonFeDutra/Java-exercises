@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="400.0" prefWidth="236.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.edu.ufca.controllers.MainView">
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextArea onKeyTyped="#onKeyTyped" prefHeight="200.0" prefWidth="200.0" />
+            <VBox prefHeight="42.0" prefWidth="201.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <HBox prefHeight="20.0" prefWidth="201.0" spacing="5.0">
+                     <children>
+                        <Label text="Quantidade de caracteres:">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                        <Label fx:id="charCountLabel" text="0" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="20.0" prefWidth="201.0">
+                     <children>
+                        <Label prefHeight="20.0" prefWidth="153.0" text="Quantidade de palavras:">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                        <Label fx:id="wordCountLabel" prefHeight="19.0" prefWidth="7.0" text="0" />
+                     </children>
+                  </HBox>
+                  <Label text="Caixa Alta:" />
+                  <Label fx:id="upperCaseLabel" prefHeight="116.0" prefWidth="201.0" VBox.vgrow="ALWAYS" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </center>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</BorderPane>
