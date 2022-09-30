@@ -6,8 +6,10 @@ public class CakeStore {
 	public void buildCake(CakeFlavor flavor, CakeDecoration[] decorations) {
 		cake = flavor;
 
-		for (CakeDecoration decoration : decorations)
+		for (CakeDecoration decoration : decorations) {
 			decoration.setCake(cake);
+			cake = decoration;
+		}
 	}
 
 	public double getTotalPrice() {
