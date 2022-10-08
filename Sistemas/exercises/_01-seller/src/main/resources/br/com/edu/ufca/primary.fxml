@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.edu.ufca.PrimaryController">
+   <children>
+      <Label text="Seller" />
+      <GridPane>
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="124.87676036852483" minWidth="10.0" prefWidth="121.87975109118108" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="94.90636241930608" minWidth="10.0" prefWidth="79.92113292711858" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Insert seller name:" />
+            <TextField onKeyTyped="#onNameKeyTyped" prefHeight="27.0" prefWidth="105.0" GridPane.columnIndex="1" />
+            <Label text="Insert seller salary:" GridPane.rowIndex="1" />
+            <Spinner fx:id="salarySpinner" editable="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label prefHeight="19.0" prefWidth="167.0" text="Insert total sales:" GridPane.rowIndex="2" />
+            <Spinner fx:id="salesSpinner" editable="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+         </children>
+      </GridPane>
+      <TextFlow prefHeight="91.0" prefWidth="162.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="The seller " />
+            <Text fx:id="nameText" fill="#793cf2" strokeType="OUTSIDE" strokeWidth="0.0" text="Unnamed" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" has a salary of " />
+            <Text fx:id="salaryText" fill="#48c296" strokeType="OUTSIDE" strokeWidth="0.0" text="00.00 R$" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" after applying a " />
+            <Text fx:id="commissionText" fill="#d98848" strokeType="OUTSIDE" strokeWidth="0.0" text="15" />
+            <Text fill="#d98848" strokeType="OUTSIDE" strokeWidth="0.0" text="\% commission" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" on the number of his sales in the month." />
+         </children></TextFlow>
+   </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</VBox>
