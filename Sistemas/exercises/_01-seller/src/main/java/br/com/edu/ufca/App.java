@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 
@@ -22,8 +23,10 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("primary"), 640, 480);
+        VBox root = (VBox) loadFXML("primary");
+        scene = new Scene(root, root.getPrefWidth(), root.getPrefHeight());
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
 

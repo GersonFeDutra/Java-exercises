@@ -1,5 +1,5 @@
 module br.com.edu.ufca {
-    requires javafx.controls;
+    requires transitive javafx.controls;
     requires javafx.fxml;
     requires org.apache.commons.lang3;
 
