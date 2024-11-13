@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="room" maxHeight="600.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.edu.ufca.PrimaryController">
+   <children>
+      <Line endX="600.0" endY="200.0" startX="0.0" startY="200.0" stroke="#9d9bff" />
+      <Line endX="300.0" endY="400.0" startX="300.0" startY="0.0" stroke="#9d9bff" />
+      <Line fx:id="distanceLine" endX="300.0" endY="200.0" startX="300.0" startY="200.0" stroke="#ffcd9c" />
+      <Circle fx:id="circlePoint" centerX="300.0" centerY="200.0" radius="16.0" stroke="#cacaca" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE">
+         <fill>
+            <RadialGradient centerX="0.7747253180361371" centerY="0.7830188693150255" focusAngle="34.4" focusDistance="0.3448276756817832" radius="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.34248775243759155" green="0.11999999731779099" blue="1.0" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.9800000190734863" green="0.6968440413475037" blue="0.4997999966144562" />
+                     </color>
+                  </Stop>
+               </stops>
+            </RadialGradient>
+         </fill>
+         <cursor>
+            <Cursor fx:constant="MOVE" />
+         </cursor>
+      </Circle>
+      <Text fx:id="coordinatesText" fill="#796ac4" x="304.0" y="226.0" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="(0,0)" />
+      <Text fx:id="distanceText" fill="#ffcd9c" x="297.0" y="205.0" mouseTransparent="true" stroke="#e1bb9a" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeMiterLimit="5.0" strokeType="OUTSIDE" strokeWidth="0.25" text="0" />
+   </children>
+</AnchorPane>
